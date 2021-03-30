@@ -30,4 +30,52 @@ local is_student = function(
     ]
 end
 
+local teacher_to_student = function(
+    self,
+    subject
+)
+    minetest.chatcommands[
+        "revoke"
+    ].func(
+        self:get_player_name(
+        ),
+        subject:get_player_name(
+        ) .. " teacher"
+    )
+    minetest.chatcommands[
+        "grant"
+    ].func(
+        self:get_player_name(
+        ),
+        subject:get_player_name(
+        ) .. " student"
+    )
+end
+
+local student_to_teacher = function(
+    self,
+    subject
+)
+    minetest.chatcommands[
+        "revoke"
+    ].func(
+        self:get_player_name(
+        ),
+        subject:get_player_name(
+        ) .. " student"
+    )
+    minetest.chatcommands[
+        "grant"
+    ].func(
+        self:get_player_name(
+        ),
+        subject:get_player_name(
+        ) .. " teacher"
+    )
+end
+
 edutest.is_student = is_student
+
+edutest.student_to_teacher = student_to_teacher
+
+edutest.teacher_to_student = teacher_to_student
