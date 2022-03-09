@@ -18,10 +18,8 @@ minetest.register_privilege(
 )
 
 local is_student = function(
-    player
+    name
 )
-    local name = player:get_player_name(
-    )
     local privs = minetest.get_player_privs(
         name
     )
@@ -32,45 +30,49 @@ end
 
 local teacher_to_student = function(
     self,
-    subject
+    subject_name
 )
+    edutest.revoke_additional_teacher_privileges(
+        self,
+        subject_name
+    )
     minetest.chatcommands[
         "revoke"
     ].func(
         self:get_player_name(
         ),
-        subject:get_player_name(
-        ) .. " teacher"
+        subject_name .. " teacher"
     )
     minetest.chatcommands[
         "grant"
     ].func(
         self:get_player_name(
         ),
-        subject:get_player_name(
-        ) .. " student"
+        subject_name .. " student"
     )
 end
 
 local student_to_teacher = function(
     self,
-    subject
+    subject_name
 )
     minetest.chatcommands[
         "revoke"
     ].func(
         self:get_player_name(
         ),
-        subject:get_player_name(
-        ) .. " student"
+        subject_name .. " student"
     )
     minetest.chatcommands[
         "grant"
     ].func(
         self:get_player_name(
         ),
-        subject:get_player_name(
-        ) .. " teacher"
+        subject_name .. " teacher"
+    )
+    edutest.give_additional_teacher_privileges(
+        self,
+        subject_name
     )
 end
 
