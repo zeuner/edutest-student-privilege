@@ -1,0 +1,5 @@
+# textdomain: edutest-student-privilege
+
+### init.lua ###
+
+player is affected by bulk commands targeted at students=gracz jest dotknięty masowymi poleceniami skierowanymi do uczniów
